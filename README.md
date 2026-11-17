@@ -1,45 +1,204 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🥤 Shake App
 
-## Getting Started
+A modern and user-friendly **Shake Management Application** built with **Next.js, React, Supabase, and TanStack Query**. This application allows users to create, view, update, and delete shake recipes with ratings.
 
-First, run the development server:
+## ✨ Features
+
+- ➕ **Create Shakes:** Add new shake recipes with a title, preparation method, and rating.
+- 📋 **View Shakes:** Display all available shakes in an organized card layout.
+- ✏️ **Edit Shakes:** Update existing shake details.
+- 🗑️ **Delete Shakes:** Remove shakes with a confirmation dialog.
+- ⭐ **Rating System:** Rate shakes from 1 to 5 stars.
+- ✅ **Form Validation:** Validate form inputs using React Hook Form and Yup.
+- ⚡ **Optimized Data Fetching:** Manage server state using TanStack Query.
+- ☁️ **Cloud Database:** Store and manage shake data using Supabase.
+- 📱 **Responsive UI:** User-friendly interface with responsive layouts.
+- 🔄 **Loading & Error States:** Display loading indicators and error messages during API operations.
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| ⚛️ Next.js | React framework for application development |
+| ⚛️ React | Building interactive user interfaces |
+| 🟢 Supabase | Backend database and data management |
+| 🔄 TanStack Query | Server-state management and data fetching |
+| 📝 React Hook Form | Form handling and input management |
+| ✅ Yup | Form validation |
+| 🎨 Tailwind CSS | Styling and responsive layouts |
+| 💎 Material UI | UI components and dialogs |
+| 🧩 TypeScript | Type safety and better development experience |
+| 🔘 shadcn/ui | Reusable UI components |
+
+## 📸 Application Features
+
+### 🥤 Create Shake
+Add a new shake by entering:
+- Title
+- Preparation Method
+- Rating (1–5)
+
+### 📋 Show All Shakes
+- View all saved shake recipes.
+- Display shake titles, preparation methods, and ratings.
+- Navigate to edit or delete individual shakes.
+
+### ✏️ Edit Shake
+- Fetch existing shake details using its ID.
+- Modify the title, preparation method, and rating.
+- Save updated information to Supabase.
+
+### 🗑️ Delete Shake
+- Delete unwanted shake recipes.
+- Confirm deletion through a confirmation dialog.
+- Automatically refresh the shake list after deletion.
+
+## 📂 Project Structure
+
+```text
+shake-app/
+│
+├── public/
+│
+├── src/
+│   ├── app/
+│   │   ├── page.tsx
+│   │   ├── showshakes/
+│   │   └── editshake/
+│   │
+│   ├── components/
+│   │   └── ui/
+│   │
+│   ├── config/
+│   │   └── supabaseClient.ts
+│   │
+│   └── types/
+│       └── types.ts
+│
+├── .env.local
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+*Note: The structure above is illustrative. Adjust it to match your actual project folders and routes.*
+
+## 🚀 Getting Started
+
+Follow these instructions to run the project locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/DoraemonTrisha/Shake-App.git
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
+cd Shake-App
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure Supabase
+
+Create a project on [Supabase](https://supabase.com/).
+
+Create a table named `shakes` with the following columns:
+
+| Column | Type | Description |
+|---|---|---|
+| id | int8 | Primary key, auto-generated |
+| title | text | Shake name |
+| method | text | Preparation method |
+| rating | int4 | Rating between 1 and 5 |
+
+### 5. Configure Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Get these values from your Supabase project's API settings.
+
+**Important:** Never expose your Supabase service role key in client-side code. Enable appropriate Row Level Security (RLS) policies for your database.
+
+### 6. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 📦 Important Dependencies
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Install the main dependencies if they are not already included:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```bash
+npm install @supabase/supabase-js
+npm install @tanstack/react-query
+npm install react-hook-form yup @hookform/resolvers
+npm install @mui/material @emotion/react @emotion/styled
+npm install @heroicons/react
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔄 TanStack Query Implementation
 
-## Learn More
+TanStack Query is used to manage server-side data operations.
 
-To learn more about Next.js, take a look at the following resources:
+- `useQuery()` – Fetch all shakes from Supabase.
+- `useMutation()` – Create, update, and delete shake records.
+- `useQueryClient()` – Invalidate and refresh cached shake data after mutations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 🗄️ Database Integration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Supabase is used as the backend database.
 
-## Deploy on Vercel
+The application performs the following database operations:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `INSERT` – Create a new shake.
+- `SELECT` – Retrieve shake records.
+- `UPDATE` – Modify existing shake details.
+- `DELETE` – Remove shake records.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
-=======
-# Shake-App
-🚀 Shake App – Full-Stack Shake Manager 🥤  I recently built Shake App, a small but comprehensive web app to create, view, and manage your favorite shakes. This project was a great exercise in combining modern frontend and backend technologies to build a responsive, interactive, and fully functional app.
->>>>>>> 098850281585ac802c1cc9203e7998da6473353e
+## 📝 Form Validation
+
+React Hook Form manages form state and submission, while Yup provides validation rules.
+
+Validation includes:
+
+- Title is required.
+- Method is required.
+- Rating is required.
+- Rating must be between 1 and 5.
+
+## 🎯 Future Improvements
+
+- 🔐 User authentication and authorization.
+- 🖼️ Upload and display shake images using Supabase Storage.
+- 🔍 Search and filter shakes.
+- ⭐ Advanced rating and review functionality.
+- 📊 Dashboard with shake statistics.
+
+## 👩‍💻 Author
+
+**Trisha Dutta**
+
+- GitHub: [@DoraemonTrisha](https://github.com/DoraemonTrisha)
+
+## 📄 License
+
+This project is open-source and available for learning and personal development.
+
+---
+
+⭐ If you like this project, consider giving it a star on GitHub!
